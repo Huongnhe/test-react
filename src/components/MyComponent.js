@@ -20,12 +20,28 @@ class MyComponent extends React.Component {
     handleOnMoverOver(even) {
         console.log(even.pageX)
     }
+    handleOnchanceInput=(even)=> {
+        this.setState({
+            name: even.target.value
+        })
+        console.log(even.target.value)
+
+    }
+    handleOnSubmit=(even)=> {
+        even.prevenDefault()
+        console.log(even.state)
+
+    }
     render() {
         return (
             <div>
                 My name is {this.state.name} and I'm {this.state.age}
-                <button onClick={(even) => { this.handleClick(even) }}>Click me</button>
-                <button onMouseOver={this.handleOnMoverOver}>Hover me</button>
+                <form onSubmit={(even) => this.handleOnSubmit(even)}>
+                    <input type="text"
+                        onChange={(even) => this.handleOnchanceInput(even)}
+                    />
+                    <button>Submit</button>
+                </form>
             </div>
         )
     };
